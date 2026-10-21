@@ -105,9 +105,7 @@ Nexo-Retail-BI-Challenge/
 ├── 02_POWER_BI/
 │   ├── NexoRetail.Report/         # Definición del informe (PBIP / PBIR)
 │   ├── NexoRetail.SemanticModel/  # Modelo semántico (TMDL: tablas y medidas)
-│   ├── NexoRetail.pbip
-│   ├── docs/                      # (reservado)
-│   └── screenshots/               # (reservado para capturas del dashboard)
+│   └── NexoRetail.pbip
 ├── analysis/
 │   └── 01_data_profiling.ipynb    # Profiling inicial en Python
 ├── data/
