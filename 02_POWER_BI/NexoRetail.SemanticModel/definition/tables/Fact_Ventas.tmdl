@@ -1,0 +1,158 @@
+table Fact_Ventas
+	lineageTag: 50164d24-43f3-4ffc-9b50-291a9b9cefb3
+
+	column ID_Venta
+		dataType: int64
+		formatString: 0
+		lineageTag: a46c5238-a754-4497-8730-e45a3b3048b7
+		summarizeBy: sum
+		sourceColumn: ID_Venta
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_Pedido
+		dataType: int64
+		formatString: 0
+		lineageTag: 807e6e65-8f2c-4341-b037-cd48cc2f2cf5
+		summarizeBy: sum
+		sourceColumn: ID_Pedido
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fecha_Venta
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f0b71055-9833-4f16-bf87-a4756ded9b43
+		summarizeBy: none
+		sourceColumn: Fecha_Venta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ID_Producto
+		dataType: int64
+		formatString: 0
+		lineageTag: 45c0871c-b7e3-45a4-afa7-ab54e253362d
+		summarizeBy: none
+		sourceColumn: ID_Producto
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_Tienda
+		dataType: int64
+		formatString: 0
+		lineageTag: 8cf97649-3248-4572-a0c2-3285181a666a
+		summarizeBy: none
+		sourceColumn: ID_Tienda
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segmento
+		dataType: string
+		lineageTag: 62857a95-ea9a-4fe5-9634-a2a69fc54575
+		summarizeBy: none
+		sourceColumn: Segmento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cantidad
+		dataType: int64
+		formatString: 0
+		lineageTag: d51a9f84-116a-48bd-91d0-283dd66db2c0
+		summarizeBy: sum
+		sourceColumn: Cantidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column Precio_Unitario
+		dataType: double
+		lineageTag: b9912293-db99-42ac-8782-5e1f68f1c759
+		summarizeBy: sum
+		sourceColumn: Precio_Unitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Precio_Lista_Vigente
+		dataType: double
+		lineageTag: beedeed1-b23b-4aef-ab93-03208a034851
+		summarizeBy: sum
+		sourceColumn: Precio_Lista_Vigente
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Costo_Unitario
+		dataType: double
+		lineageTag: 49185402-2c97-4671-afff-eb1613b68520
+		summarizeBy: sum
+		sourceColumn: Costo_Unitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Facturacion
+		dataType: double
+		lineageTag: f1a49681-7f35-4fca-9a16-cf87348f7100
+		summarizeBy: sum
+		sourceColumn: Facturacion
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Costo_Total
+		dataType: double
+		lineageTag: 30d7e399-141c-4f86-a60c-82567268b696
+		summarizeBy: sum
+		sourceColumn: Costo_Total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Margen_Bruto
+		dataType: double
+		lineageTag: 557a57a8-b542-462c-9f17-63a047604b48
+		summarizeBy: sum
+		sourceColumn: Margen_Bruto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Margen_Porcentaje
+		dataType: double
+		lineageTag: f42225d6-58cb-426c-9396-9e1d7fbe6943
+		summarizeBy: sum
+		sourceColumn: Margen_Porcentaje
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Descuento_Porcentaje
+		dataType: double
+		lineageTag: 4683dcaf-83dc-4a79-89df-063e280b1837
+		summarizeBy: sum
+		sourceColumn: Descuento_Porcentaje
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Fact_Ventas = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost\SQLEXPRESS01", "NexoRetail"),
+				    dbo_Fact_Ventas = Origen{[Schema="dbo",Item="Fact_Ventas"]}[Data]
+				in
+				    dbo_Fact_Ventas
+
+	annotation PBI_ResultType = Table
+

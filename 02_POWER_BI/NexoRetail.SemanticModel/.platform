@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "NexoRetail"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ea2e6d17-0370-4589-ae81-6dd6a8f9e2e4"
+  }
+}

@@ -1,0 +1,32 @@
+relationship AutoDetected_9b8c47cc-01b7-4687-87d1-5d39c4249a7c
+	fromColumn: Fact_Ventas.ID_Producto
+	toColumn: DimProducto.ID_Producto
+
+relationship AutoDetected_0a5ab6ba-fff5-4da5-ad25-8c0e832f688e
+	fromColumn: Fact_Devoluciones.ID_Producto
+	toColumn: DimProducto.ID_Producto
+
+relationship AutoDetected_985731cd-c983-49ce-ac08-84b9da542f69
+	fromColumn: Fact_Ventas.ID_Tienda
+	toColumn: DimTienda.ID_Tienda
+
+relationship AutoDetected_218de44e-c177-4dcb-9082-9db8afc481ed
+	fromColumn: Fact_Devoluciones.ID_Tienda
+	toColumn: DimTienda.ID_Tienda
+
+relationship AutoDetected_86e8d32d-c69d-4b11-ab4f-18b7cac88f1c
+	fromColumn: Fact_Objetivos.ID_Tienda
+	toColumn: DimTienda.ID_Tienda
+
+relationship 124c5524-929e-46c5-c565-100605ab07a5
+	fromColumn: Fact_Ventas.Fecha_Venta
+	toColumn: DimFecha.Fecha
+
+relationship 07b4c877-a22d-83d0-5d2c-01b4da1b3e32
+	fromColumn: Fact_Devoluciones.Fecha_Venta
+	toColumn: DimFecha.Fecha
+
+relationship c9e974f2-63a8-103e-3345-4b421371c8c1
+	fromColumn: Fact_Objetivos.Fecha_Mes
+	toColumn: DimFecha.Fecha
+

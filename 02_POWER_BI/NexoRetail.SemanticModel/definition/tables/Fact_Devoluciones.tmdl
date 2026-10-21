@@ -1,0 +1,138 @@
+table Fact_Devoluciones
+	lineageTag: d6f167b3-68fe-4488-8d5e-7e0d78acc84e
+
+	column ID_Devolucion
+		dataType: int64
+		formatString: 0
+		lineageTag: 9c6b3275-9499-4aad-91a8-51233cab9606
+		summarizeBy: sum
+		sourceColumn: ID_Devolucion
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_Venta
+		dataType: int64
+		formatString: 0
+		lineageTag: 6df02192-c32b-48dc-9d81-c78577829e4f
+		summarizeBy: sum
+		sourceColumn: ID_Venta
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fecha_Devolucion
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a35e5e31-976a-4ec0-9c9e-2384370c1dab
+		summarizeBy: none
+		sourceColumn: Fecha_Devolucion
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Fecha_Venta
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: cf972fab-7c1d-40ef-9505-9545b520ce7c
+		summarizeBy: none
+		sourceColumn: Fecha_Venta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ID_Producto
+		dataType: int64
+		formatString: 0
+		lineageTag: fce5fd43-79fe-4265-a757-001eda1eabb2
+		summarizeBy: none
+		sourceColumn: ID_Producto
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_Tienda
+		dataType: int64
+		formatString: 0
+		lineageTag: d17784af-70da-4dde-b22b-2f9874f4d88f
+		summarizeBy: none
+		sourceColumn: ID_Tienda
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cantidad_Devuelta
+		dataType: int64
+		formatString: 0
+		lineageTag: 15e0f689-75f4-46b6-977b-efa39a6026b8
+		summarizeBy: sum
+		sourceColumn: Cantidad_Devuelta
+
+		annotation SummarizationSetBy = Automatic
+
+	column Precio_Unitario
+		dataType: double
+		lineageTag: e058d574-c331-4c77-bc7a-875e5319f72e
+		summarizeBy: sum
+		sourceColumn: Precio_Unitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Valor_Devuelto
+		dataType: double
+		lineageTag: 00ac631e-5f51-41a3-a116-d0ca168691db
+		summarizeBy: sum
+		sourceColumn: Valor_Devuelto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Motivo
+		dataType: string
+		lineageTag: dbb98e0e-9f1d-4720-806e-497bd7b71065
+		summarizeBy: none
+		sourceColumn: Motivo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Categoria_Producto
+		dataType: string
+		lineageTag: e104ae5d-6c69-4277-acd5-d4dfbf7c74fa
+		summarizeBy: none
+		sourceColumn: Categoria_Producto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Es_Huerfana
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e382b489-3677-46af-943e-8abc60b4cae7
+		summarizeBy: none
+		sourceColumn: Es_Huerfana
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Es_Exceso_Devolucion
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c21d659d-1770-45e4-b62b-ee1eeb66bb22
+		summarizeBy: none
+		sourceColumn: Es_Exceso_Devolucion
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fact_Devoluciones = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost\SQLEXPRESS01", "NexoRetail"),
+				    dbo_Fact_Devoluciones = Origen{[Schema="dbo",Item="Fact_Devoluciones"]}[Data]
+				in
+				    dbo_Fact_Devoluciones
+
+	annotation PBI_ResultType = Table
+

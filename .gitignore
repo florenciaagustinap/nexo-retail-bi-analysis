@@ -1,0 +1,20 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Power BI (local cache / per-user settings)
+.pbi/
+*.pbix.tmp
+TempShadowCopy/
+
+# OS / editor
+Thumbs.db
+.DS_Store
+.vscode/
+
+# Temp
+*.tmp
+*.log

@@ -1,0 +1,47 @@
+table DimTienda
+	lineageTag: 78fc8ac2-dd08-417b-866f-518da3ee46fd
+
+	column ID_Tienda
+		dataType: int64
+		formatString: 0
+		lineageTag: ad180418-eb94-4a6f-a1c8-9c9c80e1ce52
+		summarizeBy: none
+		sourceColumn: ID_Tienda
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nombre_Tienda
+		dataType: string
+		lineageTag: 71b7595e-cd7d-42e8-a702-8c5a816b9f81
+		summarizeBy: none
+		sourceColumn: Nombre_Tienda
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pais
+		dataType: string
+		lineageTag: 7c9b2ad2-27e9-4caf-b3f4-fef0a705e025
+		summarizeBy: none
+		sourceColumn: Pais
+
+		annotation SummarizationSetBy = Automatic
+
+	column Canal_Venta
+		dataType: string
+		lineageTag: 8fda8ba1-3339-42fc-a5df-4df2d34f751d
+		summarizeBy: none
+		sourceColumn: Canal_Venta
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimTienda = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost\SQLEXPRESS01", "NexoRetail"),
+				    dbo_DimTienda = Origen{[Schema="dbo",Item="DimTienda"]}[Data]
+				in
+				    dbo_DimTienda
+
+	annotation PBI_ResultType = Table
+

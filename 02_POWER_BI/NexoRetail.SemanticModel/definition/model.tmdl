@@ -1,0 +1,24 @@
+model Model
+	culture: es-AR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-AR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Fact_Ventas","Fact_Devoluciones","Fact_Objetivos","DimFecha","DimProducto","DimTienda"]
+
+annotation PBI_ProTooling = ["MCP-PBIModeling","DevMode"]
+
+ref table Fact_Ventas
+ref table Fact_Devoluciones
+ref table Fact_Objetivos
+ref table DimFecha
+ref table DimProducto
+ref table DimTienda
+ref table _Medidas
+
+ref cultureInfo es-AR
+

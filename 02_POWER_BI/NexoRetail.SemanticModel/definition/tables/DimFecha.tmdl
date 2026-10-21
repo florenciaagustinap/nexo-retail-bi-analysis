@@ -1,0 +1,107 @@
+table DimFecha
+	lineageTag: bfcd2d6c-3b83-4b10-ab69-7da57c7eaeb8
+	dataCategory: Time
+
+	column Fecha
+		dataType: dateTime
+		isUnique
+		formatString: Long Date
+		lineageTag: 233d71d4-f106-45a6-8bf9-9d324bfafa97
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Anio
+		dataType: int64
+		formatString: 0
+		lineageTag: 064c0d13-972b-494b-93d6-43457be2fd02
+		summarizeBy: sum
+		sourceColumn: Anio
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes_Numero
+		dataType: int64
+		formatString: 0
+		lineageTag: 6c8b0f78-9874-4766-809f-2fb1b00f2098
+		summarizeBy: sum
+		sourceColumn: Mes_Numero
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes
+		dataType: string
+		lineageTag: 264cc107-a162-4f94-ad43-3aa50b475a8a
+		summarizeBy: none
+		sourceColumn: Mes
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Anio_Mes
+		dataType: string
+		lineageTag: 2ca4d797-5f66-4c85-92db-61c8b105b20f
+		summarizeBy: none
+		sourceColumn: Anio_Mes
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		dataType: string
+		lineageTag: 29eb64db-4273-4c94-a0c1-2aa8c889b8df
+		summarizeBy: none
+		sourceColumn: Trimestre
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre_Numero
+		dataType: int64
+		formatString: 0
+		lineageTag: ce7e1525-cbab-4ca6-94bb-184397c11781
+		summarizeBy: sum
+		sourceColumn: Trimestre_Numero
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Inicio_Mes
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 95418f63-6d47-4825-94d8-097033dda9c6
+		summarizeBy: none
+		sourceColumn: Inicio_Mes
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition DimFecha = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost\SQLEXPRESS01", "NexoRetail"),
+				    dbo_DimFecha = Origen{[Schema="dbo",Item="DimFecha"]}[Data]
+				in
+				    dbo_DimFecha
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

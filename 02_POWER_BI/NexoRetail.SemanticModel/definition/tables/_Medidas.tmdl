@@ -1,0 +1,96 @@
+table _Medidas
+	lineageTag: 2cfe6583-30c1-4070-b461-1967cb39c57f
+
+	measure 'Ventas Totales' = SUM ( Fact_Ventas[Facturacion] )
+		formatString: $ #,##0
+		lineageTag: 7fe25602-d335-4d9e-974f-9c3d253dc05c
+
+	measure 'Valor Devoluciones' = SUM ( Fact_Devoluciones[Valor_Devuelto] )
+		formatString: $ #,##0
+		lineageTag: e507d44a-79c8-4f71-b9cb-3adc7f942905
+
+	measure 'Costo Total' = SUM ( Fact_Ventas[Costo_Total] )
+		formatString: $ #,##0
+		lineageTag: 668bcde0-6f09-4f91-93c9-11fd4fb8b433
+
+	measure 'Unidades Vendidas' = SUM ( Fact_Ventas[Cantidad] )
+		formatString: #,##0
+		lineageTag: a2ecc0c7-05fa-4bb9-9c59-be6421ec1bb2
+
+	measure 'Unidades Devueltas' = SUM ( Fact_Devoluciones[Cantidad_Devuelta] )
+		formatString: #,##0
+		lineageTag: 8ac1e7c9-85b6-4d98-bc37-f3ca3160f73d
+
+	measure 'Objetivo de Ventas' = SUM ( Fact_Objetivos[Objetivo_Ventas] )
+		formatString: $ #,##0
+		lineageTag: 52b3c275-47fc-4030-a26e-737bdb8b4b2c
+
+	measure 'Margen Bruto' = [Ventas Totales] - [Costo Total]
+		formatString: $ #,##0
+		lineageTag: 7480b372-8ee6-4949-8c4a-7de6e58537ae
+
+	measure 'Ventas Netas' = [Ventas Totales] - [Valor Devoluciones]
+		formatString: $ #,##0
+		lineageTag: 0c5baf24-f8c4-4544-9efa-6156e675f2c8
+
+	measure 'Margen %' = DIVIDE ( [Margen Bruto], [Ventas Totales] )
+		formatString: 0.0%
+		lineageTag: 14f641dc-71c8-4476-b441-66e2e04b31b7
+
+	measure 'Tasa de Devolución %' = DIVIDE ( [Valor Devoluciones], [Ventas Totales] )
+		formatString: 0.0%
+		lineageTag: 3ec95851-1154-47e7-9295-bce6117206b6
+
+	measure 'Cumplimiento de Objetivo %' =
+			VAR ParesConObjetivo = SUMMARIZE ( Fact_Objetivos, DimFecha[Anio_Mes], DimTienda[ID_Tienda] )
+			VAR VentasEnPeriodosConObjetivo = CALCULATE ( [Ventas Totales], KEEPFILTERS ( ParesConObjetivo ) )
+			RETURN
+			DIVIDE ( VentasEnPeriodosConObjetivo, [Objetivo de Ventas] )
+		formatString: 0.0%
+		lineageTag: 88e2af81-cf2a-449a-b59c-0688737487d4
+
+	measure 'Brecha vs Objetivo' = [Ventas Totales] - [Objetivo de Ventas]
+		formatString: $ #,##0
+		lineageTag: af7aea42-dcce-4065-9177-07be773096a8
+
+	measure 'Ventas Totales AA' = CALCULATE ( [Ventas Totales], DATEADD ( DimFecha[Fecha], -1, YEAR ) )
+		formatString: $ #,##0
+		lineageTag: 1a2b3c4d-0001-4a00-9000-000000000001
+
+	measure 'Variación % Ventas' = DIVIDE ( [Ventas Totales] - [Ventas Totales AA], [Ventas Totales AA] )
+		formatString: +0.0%;-0.0%
+		lineageTag: 1a2b3c4d-0002-4a00-9000-000000000002
+
+	measure 'Margen % AA' = CALCULATE ( [Margen %], DATEADD ( DimFecha[Fecha], -1, YEAR ) )
+		formatString: 0.0%
+		lineageTag: 1a2b3c4d-0003-4a00-9000-000000000003
+
+	measure 'Variación pp Margen' = ( [Margen %] - [Margen % AA] ) * 100
+		formatString: +0.00 "pp";-0.00 "pp"
+		lineageTag: 1a2b3c4d-0004-4a00-9000-000000000004
+
+	measure 'Valor Devoluciones AA' = CALCULATE ( [Valor Devoluciones], DATEADD ( DimFecha[Fecha], -1, YEAR ) )
+		formatString: $ #,##0
+		lineageTag: 1a2b3c4d-0005-4a00-9000-000000000005
+
+	measure 'Variación % Devoluciones' = DIVIDE ( [Valor Devoluciones] - [Valor Devoluciones AA], [Valor Devoluciones AA] )
+		formatString: +0.0%;-0.0%
+		lineageTag: 1a2b3c4d-0006-4a00-9000-000000000006
+
+	measure 'Ventas Offline por Tienda' =
+			VAR VentasOff = CALCULATE ( [Ventas Totales], KEEPFILTERS ( DimTienda[Canal_Venta] = "Offline" ) )
+			VAR TiendasOff = CALCULATE ( DISTINCTCOUNT ( DimTienda[ID_Tienda] ), DimTienda[Canal_Venta] = "Offline" )
+			RETURN
+			DIVIDE ( VentasOff, TiendasOff )
+		formatString: $ #,##0
+		lineageTag: 1a2b3c4d-0007-4a00-9000-000000000007
+
+	column Value
+		lineageTag: 1d31f764-fc65-41aa-8289-f296183f776f
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition _Medidas = calculated
+		mode: import
+		source = {BLANK()}
+

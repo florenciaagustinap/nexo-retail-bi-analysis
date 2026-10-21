@@ -1,0 +1,52 @@
+table Fact_Objetivos
+	lineageTag: 8f4f53ee-88c5-4c4e-911d-1a8f88cacb04
+
+	column Periodo
+		dataType: string
+		lineageTag: 2a7b1616-d2b7-4dd2-923f-73b792d226ca
+		summarizeBy: none
+		sourceColumn: Periodo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fecha_Mes
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5db74fb8-9405-4c8d-b39d-5a1667c565c6
+		summarizeBy: none
+		sourceColumn: Fecha_Mes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ID_Tienda
+		dataType: int64
+		formatString: 0
+		lineageTag: 114c8ba7-7e9f-4778-a378-7211b7f407f2
+		summarizeBy: none
+		sourceColumn: ID_Tienda
+
+		annotation SummarizationSetBy = Automatic
+
+	column Objetivo_Ventas
+		dataType: double
+		lineageTag: 142daeba-2903-4475-9e99-75e7666d1991
+		summarizeBy: sum
+		sourceColumn: Objetivo_Ventas
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Fact_Objetivos = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost\SQLEXPRESS01", "NexoRetail"),
+				    dbo_Fact_Objetivos = Origen{[Schema="dbo",Item="Fact_Objetivos"]}[Data]
+				in
+				    dbo_Fact_Objetivos
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,96 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "e4965a903f68c814dbde",
+  "position": {
+    "x": 646,
+    "y": 470,
+    "z": 3003,
+    "height": 232,
+    "width": 618,
+    "tabOrder": 3003
+  },
+  "visual": {
+    "visualType": "lineClusteredColumnComboChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimTienda"
+                    }
+                  },
+                  "Property": "Pais"
+                }
+              },
+              "queryRef": "DimTienda.Pais",
+              "nativeQueryRef": "Pais",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Valor Devoluciones"
+                }
+              },
+              "queryRef": "_Medidas.Valor Devoluciones",
+              "nativeQueryRef": "Valor Devoluciones"
+            }
+          ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Tasa de Devolución %"
+                }
+              },
+              "queryRef": "_Medidas.Tasa de Devolución %",
+              "nativeQueryRef": "Tasa de Devolución %"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Las devoluciones aumentaron en 2025'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "d1a6d62e2858038824cd",
+  "position": {
+    "x": 648,
+    "y": 52,
+    "z": 2,
+    "height": 206,
+    "width": 616,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimProducto"
+                    }
+                  },
+                  "Property": "Categoria_Producto"
+                }
+              },
+              "queryRef": "DimProducto.Categoria_Producto",
+              "nativeQueryRef": "Categoria_Producto",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Tasa de Devolución %"
+                }
+              },
+              "queryRef": "_Medidas.Tasa de Devolución %",
+              "nativeQueryRef": "Tasa de Devolución %"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Ropa y Electrónica concentran las mayores tasas de devolución'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
